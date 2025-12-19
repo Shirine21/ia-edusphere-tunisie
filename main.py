@@ -1,6 +1,7 @@
 print("🚀 DEBUG: Starting IA EDUSPHERE...")
 import sys
-print(f"Python version: {sys.version}")from fastapi import FastAPI, HTTPException
+print(f"Python version: {sys.version}")
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Optional
