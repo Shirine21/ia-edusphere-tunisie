@@ -1,6 +1,3 @@
-print("🚀 DEBUG: Starting IA EDUSPHERE...")
-import sys
-print(f"Python version: {sys.version}")
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
@@ -220,3 +217,18 @@ if __name__ == "__main__":
     print(f"🌍 URL : http://localhost:{port}")
     print("=" * 50)
     uvicorn.run(app, host="0.0.0.0", port=port)
+@app.post("/decision")
+def decision(data: dict):
+    score = data.get("score", 0)
+
+    if score >= 80:
+        decision = "avancer"
+    elif score >= 50:
+        decision = "consolider"
+    else:
+        decision = "changer_modalite"
+
+    return {
+        "decision": decision,
+        "message": "Décision pédagogique générée"
+    }
