@@ -8,7 +8,7 @@ RUN echo "fastapi==0.104.1" > requirements.txt
 RUN echo "uvicorn[standard]==0.24.0" >> requirements.txt
 
 RUN echo '
-from fastapi import FastAPI, Form
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from datetime import datetime
 import os
