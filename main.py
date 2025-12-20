@@ -11,6 +11,40 @@ def home():
 def sante():
     return {"status": "healthy", "time": datetime.now().isoformat()}
 
+@app.get("/regles")
+def get_rules():
+    """Retourne toutes les règles pédagogiques disponibles"""
+    return {
+        "total": 3,
+        "regles": [
+            {
+                "erreur": "sa va",
+                "correction": "ça va",
+                "type": "homophone",
+                "explication": "'sa' = possession, 'ça' = démonstratif",
+                "exercice": "h5p/homophones-sa-ca",
+                "niveau": "CE1-CM2"
+            },
+            {
+                "erreur": "je suis aller",
+                "correction": "je suis allé",
+                "type": "conjugaison",
+                "explication": "Accord du participe passé avec 'être'",
+                "exercice": "scorm/passe-compose",
+                "niveau": "CE2-CM2"
+            },
+            {
+                "erreur": "cinq fois six",
+                "correction": "5 × 6 = 30",
+                "type": "maths",
+                "explication": "Table de multiplication par 6",
+                "exercice": "quiz/tables-multiplication",
+                "niveau": "CE1-CM2"
+            }
+        ],
+        "timestamp": datetime.now().isoformat()
+    }
+
 @app.get("/analyser")
 def analyser(texte: str = "test"):
     corrections = []
