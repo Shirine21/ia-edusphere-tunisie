@@ -47,14 +47,34 @@ def get_rules():
 
 @app.get("/analyser")
 def analyser(texte: str = "test"):
+    """Analyse un texte avec TOUTES les règles pédagogiques"""
+    
+    # Règles pédagogiques (mêmes que dans /regles)
+    regles_pedagogiques = [
+        {"erreur": "sa va", "correction": "ça va", "type": "homophone"},
+        {"erreur": "je suis aller", "correction": "je suis allé", "type": "conjugaison"},
+        {"erreur": "cinq fois six", "correction": "5 × 6 = 30", "type": "maths"},
+        {"erreur": "ils croivent", "correction": "ils croient", "type": "conjugaison"},
+        {"erreur": "plus meilleur", "correction": "meilleur", "type": "pléonasme"}
+    ]
+    
     corrections = []
-    if "sa va" in texte.lower():
-        corrections.append({"erreur": "sa va", "correction": "ça va"})
+    texte_minuscule = texte.lower()
+    
+    # Vérifier chaque règle
+    for regle in regles_pedagogiques:
+        if regle["erreur"].lower() in texte_minuscule:
+            corrections.append({
+                "erreur": regle["erreur"],
+                "correction": regle["correction"],
+                "type": regle.get("type", "general")
+            })
     
     return {
         "texte": texte,
         "corrections": corrections,
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "nombre_corrections": len(corrections)
     }
 
 if __name__ == "__main__":
